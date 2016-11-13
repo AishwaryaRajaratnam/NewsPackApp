@@ -7,6 +7,21 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var news = require('./routes/news');
+
+
+
+
+var mongoose = require('mongoose');
+//connection with database
+mongoose.connect("mongodb://localhost/newsdb")
+//assign the mongoose connection to a variable
+db= mongoose.connection;
+//verify the connection status with the database
+db.on('error',console.error.bind(console,'connection error......!!!!!'));
+db.once('open',function(){
+  console.log("Connected to MongoDB successfully");
+});
 
 var app = express();
 
@@ -20,10 +35,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../server/dist')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/news', news);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
