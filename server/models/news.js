@@ -13,7 +13,6 @@ var newsDetailsSchema = new Schema({
   category: String,
   comments: String
 
-  //: String
 });
 
 module.exports = mongoose.model('newsdetails',newsDetailsSchema);

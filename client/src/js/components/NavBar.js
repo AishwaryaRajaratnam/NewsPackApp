@@ -7,8 +7,8 @@ var NavBar = React.createClass({
    render:function()
    {
      return(
-
-       <div className="navbar navbar-fixed-top navbar-inverse">
+<div style={{marginBottom:'70'}}>
+       <nav className="navbar navbar-fixed-top navbar-inverse" >
     <div className="container">
 
 
@@ -32,36 +32,14 @@ var NavBar = React.createClass({
       <li>
       <Link to="/contact">Contact</Link>
       </li>
+<<<<<<< HEAD
 
+=======
+      <li>
+      <Link to="/search">Search</Link>
+      </li>
+>>>>>>> e57ae704c05f4306a6e184d844a79a5e83b7728f
       </ul>
-        <ul className="nav navbar-nav">
-          <li className="dropdown">
-            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><span className="glyphicon glyphicon-heart"></span> Favourites <strong className="caret"></strong></a>
-
-            <ul className="dropdown-menu">
-              <li>
-                <a href="#"> Entertainment</a>
-              </li>
-
-              <li>
-                <a href="#">Sports</a>
-              </li>
-
-              <li>
-                <a href="#">Political</a>
-              </li>
-              <li>
-                <a href="#">Ecnomical</a>
-              </li>
-
-              <li class="divider">
-              </li>
-              <li>
-                <a href="#">Others</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
 
 
 
@@ -93,8 +71,8 @@ var NavBar = React.createClass({
 
   </div>
 </div>
+</nav>
 </div>
-
 
      );
    }
