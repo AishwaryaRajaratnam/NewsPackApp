@@ -55,7 +55,7 @@ var NewsProvidersLayout= React.createClass({
     <button onClick={this.showThisNews} className="btn btn-warning"><span className="glyphicon glyphicon-star"></span> Open</button>
     {
             this.state.showCorNews
-              ? <NewsDisplay specNewsObject={this.state.specificNews} newsID={this.props.newsObject.name}/>
+              ? <NewsDisplay specNewsObject={this.state.specificNews} newsID={this.props.newsObject.name}  />
               : null
   }
 

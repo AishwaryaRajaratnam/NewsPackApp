@@ -1,10 +1,42 @@
 var express = require('express');
-var newsModel= require('../models/newsModel')
+var News= require('../models/news')
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/news', function(req, res, next) {
-  res.send('respond with a resource');
+router.route("/")
+.get(function(req, res){
+
+  // var movieVar = new Movie();
+  //  movieVar.imdbID = req.params.movieId;
+    News.find({}, function(err,allnews){
+      if(err)
+      {
+        res.send(err);
+      }
+      else {
+        console.log("All news in MongoDB fetched res ");
+        res.send(allnews);
+      }
+    })
+
+});
+
+
+router.route("/add")
+.post(function(req, res){
+  if(req.body){
+    var newsVar = new News(req.body);
+
+    newsVar.save(function(err){
+      if(err)
+      {
+        res.send(err);
+      }
+      else {
+        console.log("News inserted in Mongo");
+        res.send("News added successfully");
+      }
+    })
+  }
 });
 
 module.exports = router;

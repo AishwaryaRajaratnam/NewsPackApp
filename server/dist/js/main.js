@@ -26245,7 +26245,51 @@ module.exports=Home
 var React= require('react');
 
 var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
+  handleSubmitModal: function()
+    {
+        console.log("News add clicked 1");
+    //  e.preventDefault();
+        console.log("News add clicked 2");
+    var addedCategory= this.refs.category.value;
+    var addedComments= this.refs.comments.value;
+    var addObj={newid: this.props.specNewsObject.id,
+                  author: this.props.specNewsObject.author,
+                  title: this.props.specNewsObject.title,
+                  description: this.props.specNewsObject.description,
+                   url: this.props.specNewsObject.url,
+                   urlToImage: this.props.specNewsObject.urlToImage,
+                   publishedAt: this.props.specNewsObject.publishedAt,
+                   category: addedCategory,
+                   comments: addedComments};
+
+
+
+      console.log("News add clicked 3");
+
+       console.log(addObj);
+      $.ajax({
+        url:"http://localhost:8080/news/add",
+        type:'POST',
+        data: addObj,
+        success: function(msg)
+        {
+          alert(msg);
+          //console.log("Movie added successfully");
+        }.bind(this),
+        error: function(err)
+        {
+          console.log('error occurred on AJAX');
+          console.log(err);
+        }.bind(this)
+       });
+    },
+
   render: function(){
+    console.log("inside favmovieboxcoponent render");
+      var child=this.props.specNewsObject.publishedAt;
+      child=child.replace(/[-:]/g, '');
+        var id="#"+child;
+          console.log("New id is "+ id);
 
     return(
       React.createElement("div", null, 
@@ -26265,7 +26309,52 @@ var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
     React.createElement("p", null, "Description:  ", this.props.specNewsObject.description)
       ), 
     React.createElement("a", {href: this.props.specNewsObject.url, className: "btn btn-primary", target: "_blank"}, React.createElement("span", {className: "glyphicon glyphicon-share-alt"}), " See on"), "  ", 
-    React.createElement("button", {onClick: this.addMovie, className: "btn btn-warning"}, React.createElement("span", {className: "glyphicon glyphicon-star"}), " Add as favourite")
+
+  React.createElement("a", {className: "btn btn-success", "data-target": id, "data-toggle": "modal"}, "Add as Favourite"), 
+                            React.createElement("div", {className: "modal fade", ref: "newsid", id: child}, 
+                                      React.createElement("div", {className: "modal-dialog"}, 
+                                          React.createElement("div", {className: "modal-content"}, 
+                                              React.createElement("div", {className: "modal-header", id: "modalheader"}, 
+
+                                                  React.createElement("button", {className: "close", "data-dismiss": "modal"}, "×"), 
+                                                  React.createElement("h4", {className: "modal-title"}, "Add Category/Comments")
+
+                                              ), 
+                                              React.createElement("div", {className: "modal-body"}, 
+
+                                                  React.createElement("form", {className: "form-horizontal"}, 
+                                                      React.createElement("div", {className: "form-group"}, 
+                                                          React.createElement("label", {className: "col-lg-2 control-label", for: "category"}, "Category:"), 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+                                                          React.createElement("select", {className: "form-control", id: "category", ref: "category"}, 
+                                                            React.createElement("option", null, "sports"), 
+                                                            React.createElement("option", null, "politics"), 
+                                                            React.createElement("option", null, "economical"), 
+                                                            React.createElement("option", null, "entertainment"), 
+                                                            React.createElement("option", null, "others")
+                                                          )
+                                                            ), 
+
+  							React.createElement("label", {className: "col-lg-2 control-label", for: "comments"}, "Comments:"), 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+
+                                                              React.createElement("textarea", {className: "form-control", rows: "5", id: "comments", ref: "comments"})
+                                                          )
+                                                      ), 
+
+                                                      React.createElement("div", {className: "form-group"}, 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+                                          React.createElement("button", {className: "btn btn-default", "data-dismiss": "modal", type: "button"}, "Close"), 
+                                          React.createElement("button", {className: "btn btn-primary", type: "button", onClick: this.handleSubmitModal}, "Submit")
+                                                          )
+                                                      )
+                                                  )
+                                              )
+
+                                          )
+                                      )
+                                  )
+
     )
     ), React.createElement("br", null), React.createElement("hr", null)
     )
@@ -26281,9 +26370,23 @@ var LayoutDisplayNews=require("../components/LayoutDisplayNews.js");
 var NewsDisplay= React.createClass({displayName: "NewsDisplay",
 
   render: function(){
+    //  console.log("State Value" + this.state.id);
+    counter = 0;
     var specNewsObjArr=this.props.specNewsObject.map(function(news){
+      //var count= this.state.id;
+      //console.log("Count b4 "+count);
 
-return(React.createElement(LayoutDisplayNews, {specNewsObject: news}));
+      //console.log("news object "+JSON.stringify(news));
+      var child=news.publishedAt;
+      child=child.replace(/[-:]/g, '');
+      counter=counter+1;
+
+      news.id= counter +child;
+      console.log("counter value "+ news.id);
+      //console.log("news object "+JSON.stringify(news));
+
+      return(React.createElement(LayoutDisplayNews, {specNewsObject: news}));
+
 
 });
 
