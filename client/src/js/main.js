@@ -18,14 +18,13 @@ var MainComponent = React.createClass({
       <div>
 <NavBar />
 {this.props.children}
-
       </div>
     );
   }
 });
 
 ReactDOM.render(
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
   <Route path = "/" component = {MainComponent} >
   <IndexRoute component = {Home} />
   <Route path = "/home" component = {FindNewsProvider} />
