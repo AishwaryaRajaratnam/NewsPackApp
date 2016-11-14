@@ -33,9 +33,6 @@ var NavBar = React.createClass({
       <Link to="/contact">Contact</Link>
       </li>
 
-      <li>
-      <Link to="/favourites">Favourites</Link>
-      </li>
       </ul>
         <ul className="nav navbar-nav">
           <li className="dropdown">

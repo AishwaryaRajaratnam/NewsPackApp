@@ -5,6 +5,8 @@ render: function(){
   return(
     <div>
     <h1>Hello User!!!! </h1>
+    <h1>Hello User!!!! </h1>
+    <h1>Hello User!!!! </h1>
     </div>
   );
 }

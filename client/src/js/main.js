@@ -1,3 +1,4 @@
+
 var React= require('react');
 var ReactDOM= require('react-dom');
 
@@ -13,24 +14,24 @@ var {browserHistory,hashHistory, Route, Router, IndexRoute} = require('react-rou
 var MainComponent = React.createClass({
 
 
-  render: function(){
-    return(
-      <div>
+ render: function(){
+   return(
+     <div>
 <NavBar />
 {this.props.children}
-
-      </div>
-    );
-  }
+     </div>
+   );
+ }
 });
 
-ReactDOM.render(
-  <Router history={hashHistory}>
-  <Route path = "/" component = {MainComponent} >
-  <IndexRoute component = {Home} />
-  <Route path = "/home" component = {FindNewsProvider} />
-  <Route path = "/about" component = {About} />
-  <Route path = "/contact" component = {Contact} />
-  </Route>
-  </Router>,
-  document.getElementById('app'));
+
+ ReactDOM.render(
+  <Router history= {hashHistory}>
+            <Route path="/" component={MainComponent}>
+            <IndexRoute component={Home}/>
+
+            <Route path="/home" component={FindNewsProvider}/>
+            <Route path="/about" component={About}/>
+            <Route path="/contact" component={Contact}/>
+            </Route>
+</Router>, document.getElementById('app'));
