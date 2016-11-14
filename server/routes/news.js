@@ -2,23 +2,92 @@ var express = require('express');
 var News= require('../models/news')
 var router = express.Router();
 
-router.route("/")
-.get(function(req, res){
+
+
+router.route("/savednews")
+.post(function(req, res){
 
   // var movieVar = new Movie();
   //  movieVar.imdbID = req.params.movieId;
-    News.find({}, function(err,allnews){
-      if(err)
-      {
-        res.send(err);
+      var category=req.body.category;
+      var searchNews=req.body.searchNews;
+/*when searching in all saved news*/
+      if(category=="All" && searchNews=="blank"){
+        News.find({}, function(err,news){
+          if(err)
+          {
+            res.send(err);
+          }
+          else if(news){
+            console.log("Specfic news in MongoDB fetched res");
+            res.send(news);
+          }
+          else{
+            res.send("No News");
+          }
+
+        })
       }
-      else {
-        console.log("All news in MongoDB fetched res ");
-        res.send(allnews);
+      /*when searching in specific category with specific keyword*/      
+      else if(category=="All" && searchNews!="blank"){
+        //searchNews="/^"+searchNews+"/i"
+        console.log(searchNews);
+
+      News.find({title: new RegExp(searchNews, 'i')}, function(err,news){
+        if(err)
+        {
+          res.send(err);
+        }
+        else if(news){
+          console.log("Specfic news in MongoDB fetched res");
+          res.send(news);
+        }
+        else{
+          res.send("No News");
+        }
+
+      })
       }
-    })
+      //when searching with category
+      else if (category!="All" && searchNews=="blank") {
+        News.find({category:category}, function(err,news){
+          if(err)
+          {
+            res.send(err);
+          }
+          else if(news){
+            console.log("Specfic news in MongoDB fetched res");
+            res.send(news);
+          }
+          else{
+            res.send("No News");
+          }
+
+        })
+
+      }
+      //when searching with category and search box
+      else if(category!="All" && searchNews!="blank"){
+        console.log(searchNews);
+
+      News.find({title: new RegExp(searchNews, 'i'),category:category}, function(err,news){
+        if(err)
+        {
+          res.send(err);
+        }
+        else if(news){
+          console.log("Specfic news in MongoDB fetched res");
+          res.send(news);
+        }
+        else{
+          res.send("No News");
+        }
+
+      })
+      }
 
 });
+
 
 
 router.route("/add")
@@ -41,7 +110,7 @@ router.route("/add")
 
 router.route("/remove/:newsId")
 .delete(function(req, res){
-  console.log("I am printing "+req.params.newsId);
+  //console.log("I am printing "+req.params.newsId);
   if(req.params.newsId){
     News.remove({newid:req.params.newsId},function(err){
       if(err)

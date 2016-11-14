@@ -1,13 +1,61 @@
 var React= require('react');
-
+var DisplayFav=require("../components/DisplayFav.js");
 var Search= React.createClass({
+
+  getInitialState: function(){
+  return({
+  newsFav:[]
+  });
+},
 
   onFormSubmit: function (e) {
 e.preventDefault();
-var  cat=this.refs.category.value
+
 var searchNews=this.refs.newsSearch.value;
-this.refs.MovieName.value='';
-this.props.onSearch(movieName);
+
+if(searchNews=""){searchNews="blank"}
+var  category=this.refs.category.value;
+alert(searchNews);
+this.refs.newsSearch.value='';
+//all news fetched
+/*if(searchNews="" & category=="All"){
+var url="http://localhost:8080/news/savednews"
+}
+
+else if(searchNews!="" & category=="All"){
+var url="http://localhost:8080/news/savednews"+"/"+searchNews
+}
+else if(searchNews!="" & category!="All"){
+var url="http://localhost:8080/news/savednews"+"/"+category+"/"+searchNews
+}
+else{
+  var url="http://localhost:8080/news/savednews"+"/"+category
+}*/
+var url="http://localhost:8080/news/savednews"
+var obj={category:category,searchNews:searchNews}
+$.ajax({
+    url: url,
+    type: 'POST',
+    dataType: 'JSON',
+    data: obj,
+    success: function(data)
+    {
+      alert(data.Response);
+      if(data.Response=="No News"){
+        alert("Sorry!!!..No News by this name.");
+      }
+      else{
+        alert("News Found");
+        this.setState({newsFav:data});
+      }
+    }.bind(this),
+
+    error: function(err)
+    {
+      console.log(err);
+    }.bind(this)
+  });
+
 },
   render: function(){
     return(
@@ -16,11 +64,13 @@ this.props.onSearch(movieName);
 <form onSubmit={this.onFormSubmit} className="navbar-form center">
 <label className="col-lg-2 control-label" for="category">Category:</label>
 <select className="" id="category" ref="category">
+<option>All</option>
 <option>sports</option>
 <option>politics</option>
 <option>economical</option>
 <option>entertainment</option>
 <option>others</option>
+
 </select>
 
 <div className="container text-center">
@@ -34,7 +84,7 @@ this.props.onSearch(movieName);
 </div>
 </form>
 </div>
-
+<DisplayFav favNews={this.state.newsFav}/>
 
 </div>
 

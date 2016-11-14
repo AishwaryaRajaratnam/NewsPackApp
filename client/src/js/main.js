@@ -15,24 +15,24 @@ var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 var MainComponent = React.createClass({
 
 
-  render: function(){
-    return(
-      <div>
+ render: function(){
+   return(
+     <div>
 <NavBar />
 {this.props.children}
-      </div>
-    );
-  }
+     </div>
+   );
+ }
 });
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-  <Route path = "/" component = {MainComponent} >
-  <IndexRoute component = {Home} />
-  <Route path = "/home" component = {FindNewsProvider} />
-  <Route path = "/about" component = {About} />
-  <Route path = "/search" component = {Search} />
-  <Route path = "/contact" component = {Contact} />
-  </Route>
-  </Router>,
-  document.getElementById('app'));
+ <Router history={browserHistory}>
+ <Route path = "/" component = {MainComponent} >
+ <IndexRoute component = {Home} />
+ <Route path = "/home" component = {FindNewsProvider} />
+ <Route path = "/about" component = {About} />
+ <Route path = "/search" component = {Search} />
+ <Route path = "/contact" component = {Contact} />
+ </Route>
+ </Router>,
+ document.getElementById('app'));

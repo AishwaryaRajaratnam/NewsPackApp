@@ -26132,20 +26132,23 @@ module.exports = function (str) {
 },{}],234:[function(require,module,exports){
 arguments[4][45][0].apply(exports,arguments)
 },{"_process":49,"dup":45}],235:[function(require,module,exports){
-var React= require('react');
 
-var About= React.createClass({displayName: "About",
-render: function(){
-  return(
+var React = require('react');
 
-    React.createElement("div", null, 
-    "This is an about page...!!!"
-    )
+var About = React.createClass({displayName: "About",
+  render: function() {
+    return (
+      React.createElement("div", null, 
+        React.createElement("h2", null, "This is About Us page")
+
+      )
+
+
   );
 }
 });
 
-module.exports=About;
+module.exports = About;
 },{"react":232}],236:[function(require,module,exports){
 var React= require('react');
 
@@ -26183,7 +26186,154 @@ return(React.createElement(NewsProvidersLayout, {newsObject: news}));
 });
 
 module.exports=DisplayBox;
-},{"../components/NewsProvidersLayout.js":243,"react":232}],238:[function(require,module,exports){
+},{"../components/NewsProvidersLayout.js":245,"react":232}],238:[function(require,module,exports){
+var React= require('react');
+var FavNewsLayout=require("../components/FavNewsLayout.js");
+
+
+var DisplayFav= React.createClass({displayName: "DisplayFav",
+  render: function(){
+    var favNewsArr=this.props.favNews.map(function(news){
+return(React.createElement(FavNewsLayout, {newsObject: news}));
+
+});
+
+    return(
+      React.createElement("div", {className: "container"}, 
+      React.createElement("h1", null, "News Providers"), 
+      favNewsArr
+      )
+    );
+  }
+
+});
+
+module.exports=DisplayFav;
+},{"../components/FavNewsLayout.js":239,"react":232}],239:[function(require,module,exports){
+var React= require('react');
+
+var FavNewsLayout= React.createClass({displayName: "FavNewsLayout",
+  handleSubmitModal: function()
+    {
+        console.log("News add clicked 1");
+    //  e.preventDefault();
+        console.log("News add clicked 2");
+    var addedCategory= this.refs.category.value;
+    var addedComments= this.refs.comments.value;
+    var addObj={newid: this.props.newsObject.id,
+                  author: this.props.newsObject.author,
+                  title: this.props.newsObject.title,
+                  description: this.props.newsObject.description,
+                   url: this.props.newsObject.url,
+                   urlToImage: this.props.newsObject.urlToImage,
+                   publishedAt: this.props.newsObject.publishedAt,
+                   category: addedCategory,
+                   comments: addedComments};
+
+
+
+      console.log("News add clicked 3");
+
+       console.log(addObj);
+      $.ajax({
+        url:"http://localhost:8080/news/add",
+        type:'POST',
+        data: addObj,
+        success: function(msg)
+        {
+          alert(msg);
+          //console.log("Movie added successfully");
+        }.bind(this),
+        error: function(err)
+        {
+          console.log('error occurred on AJAX');
+          console.log(err);
+        }.bind(this)
+       });
+    },
+
+  render: function(){
+    console.log("inside favmovieboxcoponent render");
+      var child=this.props.newsObject.publishedAt;
+      child=child.replace(/[-:]/g, '');
+        var id="#"+child;
+          console.log("New id is "+ id);
+
+    return(
+      React.createElement("div", null, 
+      React.createElement("div", {className: "row"}, 
+      React.createElement("br", null), "    ", React.createElement("br", null), 
+      React.createElement("h1", null, this.props.newsObject.title), 
+      React.createElement("div", {className: "col-lg-4"}, 
+
+
+      React.createElement("img", {src: this.props.newsObject.urlToImage, alt: "Poster Image", height: "300", width: "250", style: {marginTop:'20'}})
+      ), 
+
+      React.createElement("div", {className: "col-lg-5"}, 
+      React.createElement("div", {className: "well"}, 
+React.createElement("br", null), 
+
+    React.createElement("h3", null, "Description: "), this.props.newsObject.description, React.createElement("hr", null), 
+    React.createElement("h3", null, "Comments:"), this.props.newsObject.comments, React.createElement("hr", null), 
+    React.createElement("h3", null, "Category:"), this.props.newsObject.category
+      ), 
+    React.createElement("a", {href: this.props.newsObject.url, className: "btn btn-primary", target: "_blank"}, React.createElement("span", {className: "glyphicon glyphicon-share-alt"}), " See on"), " ", 
+React.createElement("a", {className: "btn btn-success"}, "Delete"), " ", 
+  React.createElement("a", {className: "btn btn-success", "data-target": id, "data-toggle": "modal"}, "Update"), 
+                            React.createElement("div", {className: "modal fade", ref: "newsid", id: child}, 
+                                      React.createElement("div", {className: "modal-dialog"}, 
+                                          React.createElement("div", {className: "modal-content"}, 
+                                              React.createElement("div", {className: "modal-header", id: "modalheader"}, 
+
+                                                  React.createElement("button", {className: "close", "data-dismiss": "modal"}, "×"), 
+                                                  React.createElement("h4", {className: "modal-title"}, "Add Category/Comments")
+
+                                              ), 
+                                              React.createElement("div", {className: "modal-body"}, 
+
+                                                  React.createElement("form", {className: "form-horizontal"}, 
+                                                      React.createElement("div", {className: "form-group"}, 
+                                                          React.createElement("label", {className: "col-lg-2 control-label", for: "category"}, "Category:"), 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+                                                          React.createElement("select", {className: "form-control", id: "category", ref: "category"}, 
+                                                            React.createElement("option", null, "sports"), 
+                                                            React.createElement("option", null, "politics"), 
+                                                            React.createElement("option", null, "economical"), 
+                                                            React.createElement("option", null, "entertainment"), 
+                                                            React.createElement("option", null, "others")
+                                                          )
+                                                            ), 
+
+  							React.createElement("label", {className: "col-lg-2 control-label", for: "comments"}, "Comments:"), 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+
+                                                              React.createElement("textarea", {className: "form-control", rows: "5", id: "comments", ref: "comments"})
+                                                          )
+                                                      ), 
+
+                                                      React.createElement("div", {className: "form-group"}, 
+                                                          React.createElement("div", {className: "col-lg-10"}, 
+                                          React.createElement("button", {className: "btn btn-default", "data-dismiss": "modal", type: "button"}, "Close"), 
+                                          React.createElement("button", {className: "btn btn-primary", type: "button"}, "Submit")
+                                                          )
+                                                      )
+                                                  )
+                                              )
+
+                                          )
+                                      )
+                                  )
+
+    )
+    ), React.createElement("br", null), React.createElement("hr", null)
+    )
+    );
+  }
+});
+
+module.exports=FavNewsLayout;
+},{"react":232}],240:[function(require,module,exports){
 var React= require('react');
 var DisplayBox=require("../components/DisplayBox.js");
 var FindNewsProvider= React.createClass({displayName: "FindNewsProvider",
@@ -26227,13 +26377,15 @@ render: function(){
 })
 
 module.exports=FindNewsProvider
-},{"../components/DisplayBox.js":237,"react":232}],239:[function(require,module,exports){
+},{"../components/DisplayBox.js":237,"react":232}],241:[function(require,module,exports){
 var React= require('react');
 
 var Home= React.createClass({displayName: "Home",
 render: function(){
   return(
     React.createElement("div", null, 
+    React.createElement("h1", null, "Hello User!!!! "), 
+    React.createElement("h1", null, "Hello User!!!! "), 
     React.createElement("h1", null, "Hello User!!!! ")
     )
   );
@@ -26241,7 +26393,7 @@ render: function(){
 });
 
 module.exports=Home;
-},{"react":232}],240:[function(require,module,exports){
+},{"react":232}],242:[function(require,module,exports){
 var React= require('react');
 
 var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
@@ -26363,7 +26515,7 @@ var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
 });
 
 module.exports=LayoutDisplayNews;
-},{"react":232}],241:[function(require,module,exports){
+},{"react":232}],243:[function(require,module,exports){
 var React = require('react');
 var {Link} = require('react-router');
 
@@ -26398,9 +26550,11 @@ React.createElement("div", {style: {marginBottom:'70'}},
       React.createElement("li", null, 
       React.createElement(Link, {to: "/contact"}, "Contact")
       ), 
+
       React.createElement("li", null, 
       React.createElement(Link, {to: "/search"}, "Search")
       )
+
       ), 
 
 
@@ -26441,7 +26595,7 @@ React.createElement("div", {style: {marginBottom:'70'}},
  });
 
 module.exports = NavBar;
-},{"react":232,"react-router":81}],242:[function(require,module,exports){
+},{"react":232,"react-router":81}],244:[function(require,module,exports){
 var React= require('react');
 var LayoutDisplayNews=require("../components/LayoutDisplayNews.js");
 
@@ -26481,7 +26635,7 @@ var NewsDisplay= React.createClass({displayName: "NewsDisplay",
 });
 
 module.exports=NewsDisplay;
-},{"../components/LayoutDisplayNews.js":240,"react":232}],243:[function(require,module,exports){
+},{"../components/LayoutDisplayNews.js":242,"react":232}],245:[function(require,module,exports){
 var React= require('react');
 var NewsDisplay=require("../components/NewsDisplay.js");
 
@@ -26552,17 +26706,65 @@ React.createElement("br", null), React.createElement("br", null), React.createEl
 });
 
 module.exports=NewsProvidersLayout;
-},{"../components/NewsDisplay.js":242,"react":232}],244:[function(require,module,exports){
+},{"../components/NewsDisplay.js":244,"react":232}],246:[function(require,module,exports){
 var React= require('react');
-
+var DisplayFav=require("../components/DisplayFav.js");
 var Search= React.createClass({displayName: "Search",
+
+  getInitialState: function(){
+  return({
+  newsFav:[]
+  });
+},
 
   onFormSubmit: function (e) {
 e.preventDefault();
-var  cat=this.refs.category.value
+
 var searchNews=this.refs.newsSearch.value;
-this.refs.MovieName.value='';
-this.props.onSearch(movieName);
+
+if(searchNews=""){searchNews="blank"}
+var  category=this.refs.category.value;
+alert(searchNews);
+this.refs.newsSearch.value='';
+//all news fetched
+/*if(searchNews="" & category=="All"){
+var url="http://localhost:8080/news/savednews"
+}
+
+else if(searchNews!="" & category=="All"){
+var url="http://localhost:8080/news/savednews"+"/"+searchNews
+}
+else if(searchNews!="" & category!="All"){
+var url="http://localhost:8080/news/savednews"+"/"+category+"/"+searchNews
+}
+else{
+  var url="http://localhost:8080/news/savednews"+"/"+category
+}*/
+var url="http://localhost:8080/news/savednews"
+var obj={category:category,searchNews:searchNews}
+$.ajax({
+    url: url,
+    type: 'POST',
+    dataType: 'JSON',
+    data: obj,
+    success: function(data)
+    {
+      alert(data.Response);
+      if(data.Response=="No News"){
+        alert("Sorry!!!..No News by this name.");
+      }
+      else{
+        alert("News Found");
+        this.setState({newsFav:data});
+      }
+    }.bind(this),
+
+    error: function(err)
+    {
+      console.log(err);
+    }.bind(this)
+  });
+
 },
   render: function(){
     return(
@@ -26571,11 +26773,13 @@ React.createElement("div", {className: "well"},
 React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form center"}, 
 React.createElement("label", {className: "col-lg-2 control-label", for: "category"}, "Category:"), 
 React.createElement("select", {className: "", id: "category", ref: "category"}, 
+React.createElement("option", null, "All"), 
 React.createElement("option", null, "sports"), 
 React.createElement("option", null, "politics"), 
 React.createElement("option", null, "economical"), 
 React.createElement("option", null, "entertainment"), 
 React.createElement("option", null, "others")
+
 ), 
 
 React.createElement("div", {className: "container text-center"}, 
@@ -26588,8 +26792,8 @@ React.createElement("span", {className: "glyphicon glyphicon-search"}), "  Searc
 )
 )
 )
-)
-
+), 
+React.createElement(DisplayFav, {favNews: this.state.newsFav})
 
 )
 
@@ -26598,7 +26802,7 @@ React.createElement("span", {className: "glyphicon glyphicon-search"}), "  Searc
 });
 
 module.exports=Search;
-},{"react":232}],245:[function(require,module,exports){
+},{"../components/DisplayFav.js":238,"react":232}],247:[function(require,module,exports){
 var React= require('react');
 
 var About= React.createClass({displayName: "About",
@@ -26614,7 +26818,7 @@ render: function(){
 })
 
 module.exports=About
-},{"react":232}],246:[function(require,module,exports){
+},{"react":232}],248:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 
@@ -26632,25 +26836,25 @@ var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 var MainComponent = React.createClass({displayName: "MainComponent",
 
 
-  render: function(){
-    return(
-      React.createElement("div", null, 
+ render: function(){
+   return(
+     React.createElement("div", null, 
 React.createElement(NavBar, null), 
 this.props.children
-      )
-    );
-  }
+     )
+   );
+ }
 });
 
 ReactDOM.render(
-  React.createElement(Router, {history: browserHistory}, 
-  React.createElement(Route, {path: "/", component: MainComponent}, 
-  React.createElement(IndexRoute, {component: Home}), 
-  React.createElement(Route, {path: "/home", component: FindNewsProvider}), 
-  React.createElement(Route, {path: "/about", component: About}), 
-  React.createElement(Route, {path: "/search", component: Search}), 
-  React.createElement(Route, {path: "/contact", component: Contact})
-  )
-  ),
-  document.getElementById('app'));
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"./components/Search.js":244,"./components/ShowNews.js":245,"react":232,"react-dom":51,"react-router":81}]},{},[246]);
+ React.createElement(Router, {history: browserHistory}, 
+ React.createElement(Route, {path: "/", component: MainComponent}, 
+ React.createElement(IndexRoute, {component: Home}), 
+ React.createElement(Route, {path: "/home", component: FindNewsProvider}), 
+ React.createElement(Route, {path: "/about", component: About}), 
+ React.createElement(Route, {path: "/search", component: Search}), 
+ React.createElement(Route, {path: "/contact", component: Contact})
+ )
+ ),
+ document.getElementById('app'));
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":240,"./components/Home.js":241,"./components/NavBar.js":243,"./components/Search.js":246,"./components/ShowNews.js":247,"react":232,"react-dom":51,"react-router":81}]},{},[248]);

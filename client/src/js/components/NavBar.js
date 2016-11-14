@@ -32,9 +32,11 @@ var NavBar = React.createClass({
       <li>
       <Link to="/contact">Contact</Link>
       </li>
+
       <li>
       <Link to="/search">Search</Link>
       </li>
+
       </ul>
 
 
