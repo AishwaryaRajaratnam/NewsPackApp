@@ -26143,9 +26143,9 @@ var About = React.createClass({displayName: "About",
 
       )
 
+    );
+  }
 
-  );
-}
 });
 
 module.exports = About;
