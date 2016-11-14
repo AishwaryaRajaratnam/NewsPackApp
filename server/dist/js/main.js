@@ -26135,15 +26135,17 @@ arguments[4][45][0].apply(exports,arguments)
 
 var React = require('react');
 
+
 var About = React.createClass({displayName: "About",
   render: function() {
     return (
       React.createElement("div", null, 
         React.createElement("h2", null, "This is About Us page")
-              
+
       )
     );
   }
+
 });
 
 module.exports = About;
@@ -26241,7 +26243,7 @@ render: function(){
     )
   );
 }
-})
+});
 
 module.exports=Home;
 },{"react":232}],240:[function(require,module,exports){
@@ -26376,8 +26378,8 @@ var NavBar = React.createClass({displayName: "NavBar",
    render:function()
    {
      return(
-
-       React.createElement("div", {className: "navbar navbar-fixed-top navbar-inverse"}, 
+React.createElement("div", {style: {marginBottom:'70'}}, 
+       React.createElement("nav", {className: "navbar navbar-fixed-top navbar-inverse"}, 
     React.createElement("div", {className: "container"}, 
 
 
@@ -26400,37 +26402,13 @@ var NavBar = React.createClass({displayName: "NavBar",
       ), 
       React.createElement("li", null, 
       React.createElement(Link, {to: "/contact"}, "Contact")
+      ), 
+
+      React.createElement("li", null, 
+      React.createElement(Link, {to: "/search"}, "Search")
       )
 
       ), 
-        React.createElement("ul", {className: "nav navbar-nav"}, 
-          React.createElement("li", {className: "dropdown"}, 
-            React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-heart"}), " Favourites ", React.createElement("strong", {className: "caret"})), 
-
-            React.createElement("ul", {className: "dropdown-menu"}, 
-              React.createElement("li", null, 
-                React.createElement("a", {href: "#"}, " Entertainment")
-              ), 
-
-              React.createElement("li", null, 
-                React.createElement("a", {href: "#"}, "Sports")
-              ), 
-
-              React.createElement("li", null, 
-                React.createElement("a", {href: "#"}, "Political")
-              ), 
-              React.createElement("li", null, 
-                React.createElement("a", {href: "#"}, "Ecnomical")
-              ), 
-
-              React.createElement("li", {class: "divider"}
-              ), 
-              React.createElement("li", null, 
-                React.createElement("a", {href: "#"}, "Others")
-              )
-            )
-          )
-        ), 
 
 
 
@@ -26463,7 +26441,7 @@ var NavBar = React.createClass({displayName: "NavBar",
   )
 )
 )
-
+)
 
      );
    }
@@ -26585,6 +26563,47 @@ module.exports=NewsProvidersLayout;
 var React= require('react');
 
 var About= React.createClass({displayName: "About",
+render: function(){
+  return(
+    React.createElement("div", null, 
+    React.createElement("ul", null, 
+      React.createElement("li", {className: "dropdown"}, 
+        React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-heart"}), " Favourites ", React.createElement("strong", {className: "caret"})), 
+
+        React.createElement("ul", {className: "dropdown-menu"}, 
+          React.createElement("li", null, 
+            React.createElement(Link, {href: "#"}, " Entertainment")
+          ), 
+
+          React.createElement("li", null, 
+            React.createElement(Link, {href: "#"}, "Sports")
+          ), 
+
+          React.createElement("li", null, 
+            React.createElement(Link, {href: "#"}, "Political")
+          ), 
+          React.createElement("li", null, 
+            React.createElement(Link, {href: "#"}, "Ecnomical")
+          ), 
+
+          React.createElement("li", {class: "divider"}
+          ), 
+          React.createElement("li", null, 
+            React.createElement(Link, {href: "#"}, "Others")
+          )
+        )
+      )
+    )
+)
+  );
+}
+});
+
+module.exports=About;
+},{"react":232}],245:[function(require,module,exports){
+var React= require('react');
+
+var About= React.createClass({displayName: "About",
 
 render: function(){
   return(
@@ -26597,8 +26616,7 @@ render: function(){
 })
 
 module.exports=About
-},{"react":232}],245:[function(require,module,exports){
-
+},{"react":232}],246:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 
@@ -26608,8 +26626,10 @@ var Home=require("./components/Home.js");
 var Contact=require("./components/Contact.js");
 var NavBar=require("./components/NavBar.js");
 var ShowNews=require("./components/ShowNews.js");
+var Search=require("./components/Search.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
-var {browserHistory,hashHistory, Route, Router, IndexRoute} = require('react-router');
+
+var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
 var MainComponent = React.createClass({displayName: "MainComponent",
 
@@ -26624,15 +26644,15 @@ this.props.children
  }
 });
 
-
- ReactDOM.render(
-  React.createElement(Router, {history: hashHistory}, 
-            React.createElement(Route, {path: "/", component: MainComponent}, 
-            React.createElement(IndexRoute, {component: Home}), 
-
-            React.createElement(Route, {path: "/home", component: FindNewsProvider}), 
-            React.createElement(Route, {path: "/about", component: About}), 
-            React.createElement(Route, {path: "/contact", component: Contact})
-            )
-), document.getElementById('app'));
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"./components/ShowNews.js":244,"react":232,"react-dom":51,"react-router":81}]},{},[245]);
+ReactDOM.render(
+ React.createElement(Router, {history: browserHistory}, 
+ React.createElement(Route, {path: "/", component: MainComponent}, 
+ React.createElement(IndexRoute, {component: Home}), 
+ React.createElement(Route, {path: "/home", component: FindNewsProvider}), 
+ React.createElement(Route, {path: "/about", component: About}), 
+ React.createElement(Route, {path: "/search", component: Search}), 
+ React.createElement(Route, {path: "/contact", component: Contact})
+ )
+ ),
+ document.getElementById('app'));
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"./components/Search.js":244,"./components/ShowNews.js":245,"react":232,"react-dom":51,"react-router":81}]},{},[246]);
