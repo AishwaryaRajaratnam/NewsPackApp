@@ -1,40 +1,132 @@
 var React= require('react');
+var DisplayFav=require("../components/DisplayFav.js");
+var Search= React.createClass({
 
-var About= React.createClass({
-render: function(){
-  return(
-    <div>
-    <ul >
-      <li className="dropdown">
-        <a href="#" className="dropdown-toggle" data-toggle="dropdown"><span className="glyphicon glyphicon-heart"></span> Favourites <strong className="caret"></strong></a>
+ getInitialState: function(){
+ return({
+ newsFav:[]
+ });
+},
 
-        <ul className="dropdown-menu">
-          <li>
-            <Link href="#"> Entertainment</Link>
-          </li>
+ onFormSubmit: function (e) {
+e.preventDefault();
 
-          <li>
-            <Link href="#">Sports</Link>
-          </li>
+var searchNews=this.refs.newsSearch.value;
 
-          <li>
-            <Link href="#">Political</Link>
-          </li>
-          <li>
-            <Link href="#">Ecnomical</Link>
-          </li>
-
-          <li class="divider">
-          </li>
-          <li>
-            <Link href="#">Others</Link>
-          </li>
-        </ul>
-      </li>
-    </ul>
-</div>
-  );
+if(searchNews=""){searchNews="blank"}
+var  category=this.refs.category.value;
+alert(searchNews);
+this.refs.newsSearch.value='';
+//all news fetched
+/*if(searchNews="" & category=="All"){
+var url="http://localhost:8080/news/savednews"
 }
+
+else if(searchNews!="" & category=="All"){
+var url="http://localhost:8080/news/savednews"+"/"+searchNews
+}
+else if(searchNews!="" & category!="All"){
+var url="http://localhost:8080/news/savednews"+"/"+category+"/"+searchNews
+}
+else{
+ var url="http://localhost:8080/news/savednews"+"/"+category
+}*/
+var url="http://localhost:8080/news/savednews"
+var obj={category:category,searchNews:searchNews}
+$.ajax({
+   url: url,
+   type: 'POST',
+   dataType: 'JSON',
+   data: obj,
+   success: function(data)
+   {
+     alert(data.Response);
+     if(data.Response=="No News"){
+       alert("Sorry!!!..No News by this name.");
+     }
+     else{
+       alert("News Found");
+       this.setState({newsFav:data});
+     }
+   }.bind(this),
+
+   error: function(err)
+   {
+     console.log(err);
+   }.bind(this)
+ });
+
+},
+updateParentState: function(id,comments){
+
+
+        console.log("inside updateParentState");
+    var removeByAttr = function(arr, attr, value){
+    var i = arr.length;
+    while(i--){
+       if( arr[i]
+           && arr[i].hasOwnProperty(attr)
+           && (arguments.length > 2 && arr[i][attr] === value ) ){
+
+           arr.splice(i,1);
+
+       }
+    }
+    return arr;
+  }
+
+if(comments===undefined)
+{
+  var updatednewsFav=removeByAttr(this.state.newsFav,'newsid',id);
+  this.setState({newsFav:updatednewsFav});
+}
+else
+  {
+  var index;
+  var arr=this.state.newsFav;
+  arr.some(function(ele)
+	{
+	if(ele.newsid === id)
+	ele.comments=comments;
+	}
+  );
+    this.setState({newsFav:arr});
+  }
+  },
+  
+ render: function(){
+   return(
+<div>
+<div className="well">
+<form onSubmit={this.onFormSubmit} className="navbar-form center">
+<label className="col-lg-2 control-label" for="category">Category:</label>
+<select className="" id="category" ref="category">
+<option>All</option>
+<option>sports</option>
+<option>politics</option>
+<option>economical</option>
+<option>entertainment</option>
+<option>others</option>
+
+</select>
+
+<div className="container text-center">
+<h1>Search Movie</h1>
+<br></br>
+<input type="text" ref="newsSearch" className="" /> &emsp;&emsp;
+
+<button  className="btn btn-primary" >
+<span className="glyphicon glyphicon-search"></span>  Search
+</button>
+</div>
+</form>
+</div>
+<DisplayFav favNews={this.state.newsFav} updateParent={this.updateParentState}/>
+
+</div>
+
+   );
+ }
 });
 
-module.exports=About;
+module.exports=Search;
