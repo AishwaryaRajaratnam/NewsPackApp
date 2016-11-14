@@ -26183,7 +26183,7 @@ return(React.createElement(NewsProvidersLayout, {newsObject: news}));
 });
 
 module.exports=DisplayBox;
-},{"../components/NewsProvidersLayout.js":242,"react":232}],238:[function(require,module,exports){
+},{"../components/NewsProvidersLayout.js":243,"react":232}],238:[function(require,module,exports){
 var React= require('react');
 var DisplayBox=require("../components/DisplayBox.js");
 var FindNewsProvider= React.createClass({displayName: "FindNewsProvider",
@@ -26365,6 +26365,100 @@ var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
 module.exports=LayoutDisplayNews;
 },{"react":232}],241:[function(require,module,exports){
 var React= require('react');
+var {Link}=require('react-router');
+
+var NavBar= React.createClass({displayName: "NavBar",
+render: function(){
+  return(
+    React.createElement("div", {className: "NavBarComponent"}, 
+    React.createElement("div", {className: "container-fluid container"}, 
+  React.createElement("div", {className: "row"}, 
+    React.createElement("div", {className: "col-md-12"}, 
+      React.createElement("nav", {className: "navbar navbar-default navbar-inverse", role: "navigation"}, 
+
+        React.createElement("div", {className: "navbar-header"}, 
+          React.createElement("button", {type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#openclose"}, 
+             React.createElement("span", {className: "sr-only"}, "Toggle navigation"), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"})
+          ), " ", React.createElement("a", {className: "navbar-brand", href: "#"}, "MovieInfo")
+        ), 
+
+        React.createElement("div", {className: "collapse navbar-responsive-collapse", id: "openclose"}, 
+          React.createElement("ul", {className: "nav navbar-nav"}, 
+            React.createElement("li", {className: "active"}, 
+              React.createElement(Link, {to: "/home"}, "Home")
+            ), 
+
+            React.createElement("li", null, 
+              React.createElement(Link, {to: "/favourites"}, "Favourites")
+            ), 
+
+            React.createElement("li", {className: "dropdown"}, 
+               React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, "Dropdown", React.createElement("strong", {className: "caret"})), 
+              React.createElement("ul", {className: "dropdown-menu"}, 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/about"}, "About Us")
+              ), 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/contact"}, "Contact")
+              ), 
+              React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Something else here")
+                ), 
+                React.createElement("li", {className: "divider"}
+                ), 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Separated link")
+                ), 
+                React.createElement("li", {className: "divider"}
+                ), 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "One more separated link")
+                )
+              )
+            )
+          ), 
+
+
+
+          React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
+            React.createElement("li", null, 
+              React.createElement("a", {href: "#"}, "Link")
+            ), 
+            React.createElement("li", {className: "dropdown"}, 
+               React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, "MyAccount", React.createElement("strong", {className: "caret"})), 
+              React.createElement("ul", {className: "dropdown-menu"}, 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Action")
+                ), 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Another action")
+                ), 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Something else here")
+                ), 
+                React.createElement("li", {className: "divider"}
+                ), 
+                React.createElement("li", null, 
+                  React.createElement("a", {href: "#"}, "Separated link")
+                )
+              )
+            )
+          )
+        )
+
+      )
+    )
+  )
+  )
+)
+
+  );
+}
+});
+
+module.exports=NavBar;
+},{"react":232,"react-router":81}],242:[function(require,module,exports){
+var React= require('react');
 var LayoutDisplayNews=require("../components/LayoutDisplayNews.js");
 
 var NewsDisplay= React.createClass({displayName: "NewsDisplay",
@@ -26403,7 +26497,7 @@ var NewsDisplay= React.createClass({displayName: "NewsDisplay",
 });
 
 module.exports=NewsDisplay;
-},{"../components/LayoutDisplayNews.js":240,"react":232}],242:[function(require,module,exports){
+},{"../components/LayoutDisplayNews.js":240,"react":232}],243:[function(require,module,exports){
 var React= require('react');
 var NewsDisplay=require("../components/NewsDisplay.js");
 
@@ -26474,7 +26568,7 @@ React.createElement("br", null), React.createElement("br", null), React.createEl
 });
 
 module.exports=NewsProvidersLayout;
-},{"../components/NewsDisplay.js":241,"react":232}],243:[function(require,module,exports){
+},{"../components/NewsDisplay.js":242,"react":232}],244:[function(require,module,exports){
 var React= require('react');
 
 var About= React.createClass({displayName: "About",
@@ -26490,13 +26584,14 @@ render: function(){
 })
 
 module.exports=About
-},{"react":232}],244:[function(require,module,exports){
+},{"react":232}],245:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 
 var About=require("./components/About.js");
 var Home=require("./components/Home.js");
 var Contact=require("./components/Contact.js");
+var NavBar=require("./components/NavBar.js");
 var ShowNews=require("./components/ShowNews.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
@@ -26507,7 +26602,7 @@ var MainComponent = React.createClass({displayName: "MainComponent",
   render: function(){
     return(
       React.createElement("div", null, 
-
+React.createElement(NavBar, null), 
     this.props.children
 
       )
@@ -26525,4 +26620,4 @@ ReactDOM.render(
   )
   ),
   document.getElementById('app'));
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/ShowNews.js":243,"react":232,"react-dom":51,"react-router":81}]},{},[244]);
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"./components/ShowNews.js":244,"react":232,"react-dom":51,"react-router":81}]},{},[245]);
