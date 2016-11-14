@@ -20,6 +20,24 @@ router.route("/")
 
 });
 
+router.route("/:category")
+.get(function(req, res){
+
+  // var movieVar = new Movie();
+  //  movieVar.imdbID = req.params.movieId;
+    if(req.params.category){
+    News.find({category:req.params.category}, function(err,allnews){
+      if(err)
+      {
+        res.send(err);
+      }
+      else {
+        console.log("Specfic news in MongoDB fetched res ");
+        res.send(allnews);
+      }
+    })
+}
+});
 
 router.route("/add")
 .post(function(req, res){
@@ -41,7 +59,7 @@ router.route("/add")
 
 router.route("/remove/:newsId")
 .delete(function(req, res){
-  console.log("I am printing "+req.params.newsId);
+  //console.log("I am printing "+req.params.newsId);
   if(req.params.newsId){
     News.remove({newid:req.params.newsId},function(err){
       if(err)

@@ -1,13 +1,14 @@
 var React= require('react');
 var ReactDOM= require('react-dom');
 
+var NavBar=require("./components/NavBar.js");
 var About=require("./components/About.js");
 var Home=require("./components/Home.js");
 var Contact=require("./components/Contact.js");
 var NavBar=require("./components/NavBar.js");
 var ShowNews=require("./components/ShowNews.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
-var {browserHistory, Route, Router, IndexRoute} = require('react-router');
+var {browserHistory,hashHistory, Route, Router, IndexRoute} = require('react-router');
 
 var MainComponent = React.createClass({
 
@@ -16,18 +17,18 @@ var MainComponent = React.createClass({
     return(
       <div>
 <NavBar />
-    {this.props.children}
+{this.props.children}
 
       </div>
-    )
+    );
   }
 });
 
 ReactDOM.render(
-  <Router history={browserHistory}>
+  <Router history={hashHistory}>
   <Route path = "/" component = {MainComponent} >
-  <IndexRoute component = {FindNewsProvider} />
-
+  <IndexRoute component = {Home} />
+  <Route path = "/home" component = {FindNewsProvider} />
   <Route path = "/about" component = {About} />
   <Route path = "/contact" component = {Contact} />
   </Route>
