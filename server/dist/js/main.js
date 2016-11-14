@@ -26141,25 +26141,25 @@ render: function(){
     React.createElement("div", null, 
     "This is an about page...!!!"
     )
-  )
+  );
 }
-})
+});
 
-module.exports=About
+module.exports=About;
 },{"react":232}],236:[function(require,module,exports){
 var React= require('react');
 
 var Contact= React.createClass({displayName: "Contact",
 render: function(){
   return(
-    React.createElement("div", null, 
+    React.createElement("div", {className: "container"}, 
     React.createElement("h1", null, "You can contact us on abc@gmail.com or call us on 9876543210")
     )
-  )
+  );
 }
-})
+});
 
-module.exports=Contact
+module.exports=Contact;
 },{"react":232}],237:[function(require,module,exports){
 var React= require('react');
 var NewsProvidersLayout=require("../components/NewsProvidersLayout.js");
@@ -26183,7 +26183,7 @@ return(React.createElement(NewsProvidersLayout, {newsObject: news}));
 });
 
 module.exports=DisplayBox;
-},{"../components/NewsProvidersLayout.js":242,"react":232}],238:[function(require,module,exports){
+},{"../components/NewsProvidersLayout.js":243,"react":232}],238:[function(require,module,exports){
 var React= require('react');
 var DisplayBox=require("../components/DisplayBox.js");
 var FindNewsProvider= React.createClass({displayName: "FindNewsProvider",
@@ -26240,7 +26240,7 @@ render: function(){
 }
 })
 
-module.exports=Home
+module.exports=Home;
 },{"react":232}],240:[function(require,module,exports){
 var React= require('react');
 
@@ -26275,6 +26275,113 @@ var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
 
 module.exports=LayoutDisplayNews;
 },{"react":232}],241:[function(require,module,exports){
+var React = require('react');
+var {Link} = require('react-router');
+
+
+var NavBar = React.createClass({displayName: "NavBar",
+
+   render:function()
+   {
+     return(
+
+       React.createElement("div", {className: "navbar navbar-fixed-top navbar-inverse"}, 
+    React.createElement("div", {className: "container"}, 
+
+
+      React.createElement("button", {className: "navbar-toggle", "data-target": ".navbar-responsive-collapse", "data-toggle": "collapse", type: "button"}, 
+        React.createElement("span", {className: "icon-bar"}), 
+        React.createElement("span", {className: "icon-bar"}), 
+        React.createElement("span", {className: "icon-bar"})
+      ), 
+
+      React.createElement("a", {className: "navbar-brand", href: "#"}, "NewsInShorts"), 
+
+      React.createElement("div", {className: "nav-collapse collapse navbar-responsive-collapse"}, 
+      React.createElement("ul", {className: "nav navbar-nav navbar-left"}, 
+      React.createElement("li", {className: "active"}, 
+      React.createElement(Link, {to: "/home"}, "Home")
+      ), 
+
+      React.createElement("li", null, 
+      React.createElement(Link, {to: "/about"}, "About Us")
+      ), 
+      React.createElement("li", null, 
+      React.createElement(Link, {to: "/contact"}, "Contact")
+      ), 
+
+      React.createElement("li", null, 
+      React.createElement(Link, {to: "/favourites"}, "Favourites")
+      )
+      ), 
+        React.createElement("ul", {className: "nav navbar-nav"}, 
+          React.createElement("li", {className: "dropdown"}, 
+            React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-heart"}), " Favourites ", React.createElement("strong", {className: "caret"})), 
+
+            React.createElement("ul", {className: "dropdown-menu"}, 
+              React.createElement("li", null, 
+                React.createElement("a", {href: "#"}, " Entertainment")
+              ), 
+
+              React.createElement("li", null, 
+                React.createElement("a", {href: "#"}, "Sports")
+              ), 
+
+              React.createElement("li", null, 
+                React.createElement("a", {href: "#"}, "Political")
+              ), 
+              React.createElement("li", null, 
+                React.createElement("a", {href: "#"}, "Ecnomical")
+              ), 
+
+              React.createElement("li", {class: "divider"}
+              ), 
+              React.createElement("li", null, 
+                React.createElement("a", {href: "#"}, "Others")
+              )
+            )
+          )
+        ), 
+
+
+
+    React.createElement("ul", {className: "nav navbar-nav pull-right"}, 
+      React.createElement("li", {className: "dropdown"}, 
+        React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-user"}), " My Account ", React.createElement("strong", {className: "caret"})), 
+
+        React.createElement("ul", {className: "dropdown-menu"}, 
+          React.createElement("li", null, 
+            React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-wrench"}), " Settings")
+          ), 
+
+          React.createElement("li", null, 
+            React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-refresh"}), " Update Profile")
+          ), 
+
+          React.createElement("li", null, 
+            React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-briefcase"}), " Billing")
+          ), 
+
+          React.createElement("li", {className: "divider"}), 
+
+          React.createElement("li", null, 
+            React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-off"}), " Sign out")
+          )
+        )
+      )
+    )
+
+  )
+)
+)
+
+
+     );
+   }
+ });
+
+module.exports = NavBar;
+},{"react":232,"react-router":81}],242:[function(require,module,exports){
 var React= require('react');
 var LayoutDisplayNews=require("../components/LayoutDisplayNews.js");
 
@@ -26300,7 +26407,7 @@ return(React.createElement(LayoutDisplayNews, {specNewsObject: news}));
 });
 
 module.exports=NewsDisplay;
-},{"../components/LayoutDisplayNews.js":240,"react":232}],242:[function(require,module,exports){
+},{"../components/LayoutDisplayNews.js":240,"react":232}],243:[function(require,module,exports){
 var React= require('react');
 var NewsDisplay=require("../components/NewsDisplay.js");
 
@@ -26371,7 +26478,7 @@ React.createElement("br", null), React.createElement("br", null), React.createEl
 });
 
 module.exports=NewsProvidersLayout;
-},{"../components/NewsDisplay.js":241,"react":232}],243:[function(require,module,exports){
+},{"../components/NewsDisplay.js":242,"react":232}],244:[function(require,module,exports){
 var React= require('react');
 
 var About= React.createClass({displayName: "About",
@@ -26387,16 +26494,17 @@ render: function(){
 })
 
 module.exports=About
-},{"react":232}],244:[function(require,module,exports){
+},{"react":232}],245:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 
+var NavBar=require("./components/NavBar.js");
 var About=require("./components/About.js");
 var Home=require("./components/Home.js");
 var Contact=require("./components/Contact.js");
 var ShowNews=require("./components/ShowNews.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
-var {browserHistory, Route, Router, IndexRoute} = require('react-router');
+var {browserHistory,hashHistory, Route, Router, IndexRoute} = require('react-router');
 
 var MainComponent = React.createClass({displayName: "MainComponent",
 
@@ -26404,22 +26512,22 @@ var MainComponent = React.createClass({displayName: "MainComponent",
   render: function(){
     return(
       React.createElement("div", null, 
-
+      React.createElement(NavBar, null), 
     this.props.children
 
       )
-    )
+    );
   }
 });
 
 ReactDOM.render(
-  React.createElement(Router, {history: browserHistory}, 
+  React.createElement(Router, {history: hashHistory}, 
   React.createElement(Route, {path: "/", component: MainComponent}, 
-  React.createElement(IndexRoute, {component: FindNewsProvider}), 
-
+  React.createElement(IndexRoute, {component: Home}), 
+  React.createElement(Route, {path: "/home", component: FindNewsProvider}), 
   React.createElement(Route, {path: "/about", component: About}), 
   React.createElement(Route, {path: "/contact", component: Contact})
   )
   ),
   document.getElementById('app'));
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/ShowNews.js":243,"react":232,"react-dom":51,"react-router":81}]},{},[244]);
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"./components/ShowNews.js":244,"react":232,"react-dom":51,"react-router":81}]},{},[245]);

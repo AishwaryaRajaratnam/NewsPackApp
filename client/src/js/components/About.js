@@ -7,8 +7,8 @@ render: function(){
     <div>
     This is an about page...!!!
     </div>
-  )
+  );
 }
-})
+});
 
-module.exports=About
+module.exports=About;

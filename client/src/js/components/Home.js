@@ -10,4 +10,4 @@ render: function(){
 }
 })
 
-module.exports=Home
+module.exports=Home;
