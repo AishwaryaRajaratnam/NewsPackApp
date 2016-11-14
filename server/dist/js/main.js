@@ -26555,44 +26555,49 @@ module.exports=NewsProvidersLayout;
 },{"../components/NewsDisplay.js":242,"react":232}],244:[function(require,module,exports){
 var React= require('react');
 
-var About= React.createClass({displayName: "About",
-render: function(){
-  return(
-    React.createElement("div", null, 
-    React.createElement("ul", null, 
-      React.createElement("li", {className: "dropdown"}, 
-        React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-heart"}), " Favourites ", React.createElement("strong", {className: "caret"})), 
+var Search= React.createClass({displayName: "Search",
 
-        React.createElement("ul", {className: "dropdown-menu"}, 
-          React.createElement("li", null, 
-            React.createElement(Link, {href: "#"}, " Entertainment")
-          ), 
+  onFormSubmit: function (e) {
+e.preventDefault();
+var  cat=this.refs.category.value
+var searchNews=this.refs.newsSearch.value;
+this.refs.MovieName.value='';
+this.props.onSearch(movieName);
+},
+  render: function(){
+    return(
+React.createElement("div", null, 
+React.createElement("div", {className: "well"}, 
+React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form center"}, 
+React.createElement("label", {className: "col-lg-2 control-label", for: "category"}, "Category:"), 
+React.createElement("select", {className: "", id: "category", ref: "category"}, 
+React.createElement("option", null, "sports"), 
+React.createElement("option", null, "politics"), 
+React.createElement("option", null, "economical"), 
+React.createElement("option", null, "entertainment"), 
+React.createElement("option", null, "others")
+), 
 
-          React.createElement("li", null, 
-            React.createElement(Link, {href: "#"}, "Sports")
-          ), 
+React.createElement("div", {className: "container text-center"}, 
+React.createElement("h1", null, "Search Movie"), 
+React.createElement("br", null), 
+React.createElement("input", {type: "text", ref: "newsSearch", className: ""}), "   ", 
 
-          React.createElement("li", null, 
-            React.createElement(Link, {href: "#"}, "Political")
-          ), 
-          React.createElement("li", null, 
-            React.createElement(Link, {href: "#"}, "Ecnomical")
-          ), 
-
-          React.createElement("li", {class: "divider"}
-          ), 
-          React.createElement("li", null, 
-            React.createElement(Link, {href: "#"}, "Others")
-          )
-        )
-      )
-    )
+React.createElement("button", {className: "btn btn-primary"}, 
+React.createElement("span", {className: "glyphicon glyphicon-search"}), "  Search"
 )
-  );
-}
+)
+)
+)
+
+
+)
+
+    );
+  }
 });
 
-module.exports=About;
+module.exports=Search;
 },{"react":232}],245:[function(require,module,exports){
 var React= require('react');
 
