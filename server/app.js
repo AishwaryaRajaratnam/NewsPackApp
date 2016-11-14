@@ -14,14 +14,7 @@ var news = require('./routes/news');
 
 var mongoose = require('mongoose');
 //connection with database
-mongoose.connect("mongodb://localhost/newsdb")
-//assign the mongoose connection to a variable
-db= mongoose.connection;
-//verify the connection status with the database
-db.on('error',console.error.bind(console,'connection error......!!!!!'));
-db.once('open',function(){
-  console.log("Connected to MongoDB successfully");
-});
+
 
 var app = express();
 
@@ -41,6 +34,16 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/news', news);
 
+
+
+mongoose.connect("mongodb://localhost/newsdb")
+//assign the mongoose connection to a variable
+var db= mongoose.connection;
+//verify the connection status with the database
+db.on('error',console.error.bind(console,'connection error......!!!!!'));
+db.once('open',function(){
+  console.log("Connected to MongoDB successfully");
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -48,15 +51,29 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// error handlers
 
-  // render the error page
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
+
 
 module.exports = app;
