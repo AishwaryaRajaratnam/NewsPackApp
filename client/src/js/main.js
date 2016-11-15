@@ -9,6 +9,7 @@ var NavBar=require("./components/NavBar.js");
 var ShowNews=require("./components/ShowNews.js");
 var Search=require("./components/Search.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
+var Footer=require("./components/Footer.js");
 
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
@@ -20,6 +21,7 @@ var MainComponent = React.createClass({
      <div>
 <NavBar />
 {this.props.children}
+<Footer />
      </div>
    );
  }

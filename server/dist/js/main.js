@@ -26187,7 +26187,7 @@ return(React.createElement(NewsProvidersLayout, {newsObject: news}));
 });
 
 module.exports=DisplayBox;
-},{"../components/NewsProvidersLayout.js":245,"react":232}],238:[function(require,module,exports){
+},{"../components/NewsProvidersLayout.js":246,"react":232}],238:[function(require,module,exports){
 var React= require('react');
 var FavNewsLayout=require("../components/FavNewsLayout.js");
 
@@ -26383,6 +26383,69 @@ render: function(){
 module.exports=FindNewsProvider
 },{"../components/DisplayBox.js":237,"react":232}],241:[function(require,module,exports){
 var React= require('react');
+var {Link}=require('react-router');
+var Footer= React.createClass({displayName: "Footer",
+render: function(){
+  return(
+    React.createElement("div", {className: "footer navbar-fixed-bottom"}, 
+    React.createElement("footer", {id: "pg-footer", style: {backgroundColor:"black"}}, 
+      React.createElement("div", {className: "container"}, 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-sm-4"}, 
+            React.createElement("h6", null, "Copyright © 2016 Travel Tours. All Rights Reserved")
+          ), 
+
+
+
+          React.createElement("div", {className: "col-sm-4"}, 
+            React.createElement("h6", null, "Navigation"), 
+            React.createElement("ul", {className: "unstyled"}, 
+
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/home"}, "Home")
+              ), 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/about"}, "About Us")
+              ), 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/contact"}, "Contact")
+              ), 
+
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/favourites"}, "Favourites")
+              )
+
+
+            )
+          ), 
+
+          React.createElement("div", {className: "col-sm-2"}, 
+            React.createElement("h6", null, "Follow Us"), 
+            React.createElement("ul", {className: "unstyled"}, 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-facebook-official", "aria-hidden": "true"})), 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-twitter", "aria-hidden": "true"})), 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-instagram", "aria-hidden": "true"}))
+            )
+          ), 
+
+          React.createElement("div", {className: "col-sm-2"}, 
+            React.createElement("h6", null, "Coded with ", React.createElement("span", {className: "glyphicon glyphicon-heart"}), " by Brad")
+          )
+        )
+      )
+    )
+    )
+
+
+
+
+  );
+}
+})
+
+module.exports=Footer
+},{"react":232,"react-router":81}],242:[function(require,module,exports){
+var React= require('react');
 
 var Home= React.createClass({displayName: "Home",
 render: function(){
@@ -26397,7 +26460,7 @@ render: function(){
 });
 
 module.exports=Home;
-},{"react":232}],242:[function(require,module,exports){
+},{"react":232}],243:[function(require,module,exports){
 var React= require('react');
 
 var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
@@ -26519,7 +26582,7 @@ var LayoutDisplayNews= React.createClass({displayName: "LayoutDisplayNews",
 });
 
 module.exports=LayoutDisplayNews;
-},{"react":232}],243:[function(require,module,exports){
+},{"react":232}],244:[function(require,module,exports){
   var React = require('react');
   var {Link} = require('react-router');
 
@@ -26599,7 +26662,7 @@ module.exports=LayoutDisplayNews;
    });
 
   module.exports = NavBar;
-},{"react":232,"react-router":81}],244:[function(require,module,exports){
+},{"react":232,"react-router":81}],245:[function(require,module,exports){
 var React= require('react');
 var LayoutDisplayNews=require("../components/LayoutDisplayNews.js");
 
@@ -26639,7 +26702,7 @@ var NewsDisplay= React.createClass({displayName: "NewsDisplay",
 });
 
 module.exports=NewsDisplay;
-},{"../components/LayoutDisplayNews.js":242,"react":232}],245:[function(require,module,exports){
+},{"../components/LayoutDisplayNews.js":243,"react":232}],246:[function(require,module,exports){
 var React= require('react');
 var NewsDisplay=require("../components/NewsDisplay.js");
 
@@ -26717,7 +26780,7 @@ React.createElement("br", null), React.createElement("br", null), React.createEl
 });
 
 module.exports=NewsProvidersLayout;
-},{"../components/NewsDisplay.js":244,"react":232}],246:[function(require,module,exports){
+},{"../components/NewsDisplay.js":245,"react":232}],247:[function(require,module,exports){
 var React= require('react');
 var DisplayFav=require("../components/DisplayFav.js");
 var Search= React.createClass({displayName: "Search",
@@ -26851,7 +26914,7 @@ React.createElement(DisplayFav, {favNews: this.state.newsFav, updateParent: this
 });
 
 module.exports=Search;
-},{"../components/DisplayFav.js":238,"react":232}],247:[function(require,module,exports){
+},{"../components/DisplayFav.js":238,"react":232}],248:[function(require,module,exports){
 var React= require('react');
 
 var About= React.createClass({displayName: "About",
@@ -26867,7 +26930,7 @@ render: function(){
 })
 
 module.exports=About
-},{"react":232}],248:[function(require,module,exports){
+},{"react":232}],249:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 
@@ -26879,6 +26942,7 @@ var NavBar=require("./components/NavBar.js");
 var ShowNews=require("./components/ShowNews.js");
 var Search=require("./components/Search.js");
 var FindNewsProvider=require("./components/FindNewsProvider.js");
+var Footer=require("./components/Footer.js");
 
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
@@ -26889,7 +26953,8 @@ var MainComponent = React.createClass({displayName: "MainComponent",
    return(
      React.createElement("div", null, 
 React.createElement(NavBar, null), 
-this.props.children
+this.props.children, 
+React.createElement(Footer, null)
      )
    );
  }
@@ -26906,4 +26971,4 @@ ReactDOM.render(
  )
  ),
  document.getElementById('app'));
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":240,"./components/Home.js":241,"./components/NavBar.js":243,"./components/Search.js":246,"./components/ShowNews.js":247,"react":232,"react-dom":51,"react-router":81}]},{},[248]);
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/FindNewsProvider.js":240,"./components/Footer.js":241,"./components/Home.js":242,"./components/NavBar.js":244,"./components/Search.js":247,"./components/ShowNews.js":248,"react":232,"react-dom":51,"react-router":81}]},{},[249]);
