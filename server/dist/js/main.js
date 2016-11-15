@@ -26412,7 +26412,7 @@ render: function(){
               ), 
 
               React.createElement("li", null, 
-                React.createElement(Link, {to: "/favourites"}, "Favourites")
+                React.createElement(Link, {to: "/search"}, "Search")
               )
 
 

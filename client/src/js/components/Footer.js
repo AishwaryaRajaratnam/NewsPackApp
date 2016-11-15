@@ -28,7 +28,7 @@ render: function(){
               </li>
 
               <li>
-                <Link to="/favourites">Favourites</Link>
+                <Link to="/search">Search</Link>
               </li>
 
 
