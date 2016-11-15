@@ -6,7 +6,7 @@ Global dependencies:
 node
 mongodb
 gulp
-Github URL: https://github.com/AishwaryaRajaratnam/NewsPackApp
+Github URL: https://github.com/stackroute-hybrid/NewsPackApp_Aishwarya
 To run the application:
 
 1. Clone the repo
