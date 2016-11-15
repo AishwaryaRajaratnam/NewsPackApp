@@ -77,7 +77,8 @@ updateParentState: function(id,comments){
 
 if(comments===undefined)
 {
-  var updatednewsFav=removeByAttr(this.state.newsFav,'newsid',id);
+  console.log("inside updateParentState delete");
+  var updatednewsFav=removeByAttr(this.state.newsFav,'newid',id);
   this.setState({newsFav:updatednewsFav});
 }
 else
@@ -86,14 +87,14 @@ else
   var arr=this.state.newsFav;
   arr.some(function(ele)
 	{
-	if(ele.newsid === id)
+	if(ele.newid === id)
 	ele.comments=comments;
 	}
   );
     this.setState({newsFav:arr});
   }
   },
-  
+
  render: function(){
    return(
 <div>

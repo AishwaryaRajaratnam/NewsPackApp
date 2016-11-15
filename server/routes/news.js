@@ -94,9 +94,20 @@ router.route("/savednews")
 
 router.route("/add")
 .post(function(req, res){
+
  if(req.body){
    var newsVar = new News(req.body);
 
+   News.findOne({urlToImage:newsVar.urlToImage},{urlToImage:true},function(err,data) {
+       if(err){
+         throw err;
+       }
+     else if(data){
+         console.log("News already present");
+        res.send("this News is already present in your favourites");
+       }
+
+       else{
    newsVar.save(function(err){
      if(err)
      {
@@ -108,6 +119,8 @@ router.route("/add")
      }
    })
  }
+})
+}
 });
 
 router.route("/remove/:newsId")

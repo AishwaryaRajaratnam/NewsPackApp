@@ -74,8 +74,8 @@ var FavNewsLayout= React.createClass({
 
     <h3>Description: </h3>{this.props.newsObject.description}<hr></hr>
     <h3>Comments:</h3>{this.props.newsObject.comments}<hr></hr>
-    <h3>Category:</h3>{this.props.newsObject.category}<hr></hr>
-    <h3>Newsidd:</h3>{this.props.newsObject.newid}
+    <h3>Category:</h3>{this.props.newsObject.category}
+
       </div>
     <a href={this.props.newsObject.url} className="btn btn-primary" target="_blank"><span className="glyphicon glyphicon-share-alt"></span> See on</a>&nbsp;
 <a className='btn btn-success' onClick={this.handleDeleteNews}>Delete</a>&nbsp;

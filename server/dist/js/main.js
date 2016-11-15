@@ -26288,8 +26288,8 @@ React.createElement("br", null),
 
     React.createElement("h3", null, "Description: "), this.props.newsObject.description, React.createElement("hr", null), 
     React.createElement("h3", null, "Comments:"), this.props.newsObject.comments, React.createElement("hr", null), 
-    React.createElement("h3", null, "Category:"), this.props.newsObject.category, React.createElement("hr", null), 
-    React.createElement("h3", null, "Newsidd:"), this.props.newsObject.newid
+    React.createElement("h3", null, "Category:"), this.props.newsObject.category
+
       ), 
     React.createElement("a", {href: this.props.newsObject.url, className: "btn btn-primary", target: "_blank"}, React.createElement("span", {className: "glyphicon glyphicon-share-alt"}), " See on"), " ", 
 React.createElement("a", {className: "btn btn-success", onClick: this.handleDeleteNews}, "Delete"), " ", 
@@ -26655,27 +26655,34 @@ var NewsProvidersLayout= React.createClass({displayName: "NewsProvidersLayout",
 
 
   showThisNews: function() {
-    var url="https://newsapi.org/v1/articles?source="+this.props.newsObject.id+"&sortBy=top&apiKey=7e78852c9d854937a85f2d2fdbe097dc";
-    $.ajax({
-      url: url,
-      type: 'GET',
-      dataType: 'JSON',
 
-      success: function(data)
-      {
-        alert(data.status);
-        this.setState({specificNews:data.articles});
-      }.bind(this),
+   if(!this.state.showCorNews){
+     this.setState({showCorNews:true})
+     var url="https://newsapi.org/v1/articles?source="+this.props.newsObject.id+"&sortBy=top&apiKey=7e78852c9d854937a85f2d2fdbe097dc";
+     $.ajax({
+       url: url,
+       type: 'GET',
+       dataType: 'JSON',
 
-      error: function(err)
-      {
-        console.log(err);
-      }.bind(this)
+       success: function(data)
+       {
+         alert(data.status);
+         this.setState({specificNews:data.articles});
+       }.bind(this),
 
-    });
-    this.setState({showCorNews:true})
-  },
+       error: function(err)
+       {
+         console.log(err);
+       }.bind(this)
 
+     });
+   }
+   else{
+     this.setState({showCorNews:false})
+   }
+
+
+ },
   render: function(){
 
     return(
@@ -26790,7 +26797,8 @@ updateParentState: function(id,comments){
 
 if(comments===undefined)
 {
-  var updatednewsFav=removeByAttr(this.state.newsFav,'newsid',id);
+  console.log("inside updateParentState delete");
+  var updatednewsFav=removeByAttr(this.state.newsFav,'newid',id);
   this.setState({newsFav:updatednewsFav});
 }
 else
@@ -26799,14 +26807,14 @@ else
   var arr=this.state.newsFav;
   arr.some(function(ele)
 	{
-	if(ele.newsid === id)
+	if(ele.newid === id)
 	ele.comments=comments;
 	}
   );
     this.setState({newsFav:arr});
   }
   },
-  
+
  render: function(){
    return(
 React.createElement("div", null, 

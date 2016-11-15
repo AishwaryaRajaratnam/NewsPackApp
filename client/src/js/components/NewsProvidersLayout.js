@@ -13,27 +13,34 @@ var NewsProvidersLayout= React.createClass({
 
 
   showThisNews: function() {
-    var url="https://newsapi.org/v1/articles?source="+this.props.newsObject.id+"&sortBy=top&apiKey=7e78852c9d854937a85f2d2fdbe097dc";
-    $.ajax({
-      url: url,
-      type: 'GET',
-      dataType: 'JSON',
 
-      success: function(data)
-      {
-        alert(data.status);
-        this.setState({specificNews:data.articles});
-      }.bind(this),
+   if(!this.state.showCorNews){
+     this.setState({showCorNews:true})
+     var url="https://newsapi.org/v1/articles?source="+this.props.newsObject.id+"&sortBy=top&apiKey=7e78852c9d854937a85f2d2fdbe097dc";
+     $.ajax({
+       url: url,
+       type: 'GET',
+       dataType: 'JSON',
 
-      error: function(err)
-      {
-        console.log(err);
-      }.bind(this)
+       success: function(data)
+       {
+         alert(data.status);
+         this.setState({specificNews:data.articles});
+       }.bind(this),
 
-    });
-    this.setState({showCorNews:true})
-  },
+       error: function(err)
+       {
+         console.log(err);
+       }.bind(this)
 
+     });
+   }
+   else{
+     this.setState({showCorNews:false})
+   }
+
+
+ },
   render: function(){
 
     return(
